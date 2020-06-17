@@ -138,20 +138,20 @@
 //     test: '321'
 //   }
 // })
-const CancelToken = axios.CancelToken
-let cancel
-axios.get('/get', {
-  cancelToken: new CancelToken(c => {
-    cancel = c
-  }),
-}).catch(function(e) {
-  if (axios.isCancel(e)) {
-    console.log('Request canceled')
-  }
-})
-setTimeout(() => {
-  cancel()
-}, 200)
+// const CancelToken = axios.CancelToken
+// let cancel
+// axios.get('/get', {
+//   cancelToken: new CancelToken(c => {
+//     cancel = c
+//   }),
+// }).catch(function(e) {
+//   if (axios.isCancel(e)) {
+//     console.log('Request canceled')
+//   }
+// })
+// setTimeout(() => {
+//   cancel()
+// }, 200)
 </script>
 
 <body style="padding: 0 20px">
