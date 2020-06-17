@@ -1,0 +1,164 @@
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>ts-axios examples</title>
+</head>
+<script src='../ts-axios.umd.js'></script>
+<script>
+  //拼接 params
+  // axios({
+  //   method: 'get',
+  //   url: '/get?a=213',
+  //   params: {
+  //     nnZ:null,
+  //     a: 1,
+  //     b: 2,
+  //     data:new Date(),
+  //     '@:$,#+[ ]': '[ ]',
+  //     arr:[1,2,3]
+  //   }
+  // })
+  // 获取body
+  // axios({
+  //   method:'post',
+  //   url:'/post',
+  //   data:{
+  //     'a':1
+  //   }
+  // }).then(res=>{
+  //   console.log(213)
+  //   console.log(res)
+  // })
+  //处理error
+    // axios({
+    //   method: 'get',
+    //   url: '/error/get1'
+    // }).then((res) => {
+    //   console.log(res)
+    // }).catch((e) => {
+    //   console.log(e)
+    // })
+
+    // axios({
+    //   method: 'get',
+    //   url: '/error/get'
+    // }).then((res) => {
+    //   console.log(res)
+    // }).catch((e) => {
+    //   console.log(e)
+    // })
+
+    // setTimeout(() => {
+    //   axios({
+    //     method: 'get',
+    //     url: '/error/get'
+    //   }).then((res) => {
+    //     console.log(res)
+    //   }).catch((e) => {
+    //     console.log(e)
+    //   })
+    // }, 5000)
+
+    // axios({
+    //   method: 'get',
+    //   url: '/error/timeout',
+    //   timeout: 2000
+    // }).then((res) => {
+    //   console.log(res)
+    // }).catch((e) => {
+    //   console.log(e.message)
+    // })
+//静态方法
+// axios.get('/get')
+// axios.post('/post',{a:1})
+//函数重载
+// axios({
+//   url: '/post',
+//   method: 'post',
+//   data: {
+//     msg: 'hi'
+//   }
+// })
+// axios('/post', {
+//   method: 'post',
+//   data: {
+//     msg: 'hello'
+//   }
+// })
+//拦截器 & 默认请求配置
+// axios.defaults.headers.common['test2'] = 123
+// axios.interceptors.request.use(config => {
+//   console.log('request',1)
+//   return config
+// })
+// axios.interceptors.request.use(config => {
+//   console.log('request',2)
+//   return config
+// })
+// axios.interceptors.request.use(config => {
+//   console.log('request',3)
+//   return config
+// })
+
+// axios.interceptors.response.use(res => {
+//   console.log('response',1)
+//   return res
+// })
+// let interceptor = axios.interceptors.response.use(res => {
+//   console.log('response',2)
+//   return res
+// })
+// axios.interceptors.response.use(res => {
+//   console.log('response',3)
+//   return res
+// })
+
+// axios.interceptors.response.eject(interceptor)
+// axios({
+//   url: '/post',
+//   method: 'post',
+//   data: {
+//     msg: 'hi'
+//   },
+//   headers: {
+//     test: '321'
+//   }
+// })
+// const instance = axios.create({
+  
+// })
+// instance({
+//   url: '/post',
+//   method: 'post',
+//   data: {
+//     msg: 'hi'
+//   },
+//   headers: {
+//     test: '321'
+//   }
+// })
+const CancelToken = axios.CancelToken
+let cancel
+axios.get('/get', {
+  cancelToken: new CancelToken(c => {
+    cancel = c
+  }),
+}).catch(function(e) {
+  if (axios.isCancel(e)) {
+    console.log('Request canceled')
+  }
+})
+setTimeout(() => {
+  cancel()
+}, 200)
+</script>
+
+<body style="padding: 0 20px">
+  <h1>ts-axios examples</h1>
+  <ul>
+    <li><a href="">Simple</a></li>
+  </ul>
+</body>
+
+</html>
